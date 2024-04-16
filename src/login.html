@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" dir="ltr">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-</head>
+    <title> Password Manager </title>
+    <link rel="stylesheet" href="/styles/reg-style.css">
+   </head>
 <body>
-    <h1>Login Page</h1>
+  <div class="wrapper">
+    <div class="logo-upper">
+      <img src="../img/logo-square.png" alt="Password Manager Logo">
+    </div>
+    <h2>Login</h2>
+    <form action="#">
+      <div class="input-box">
+        <input type="text" placeholder="Email" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" required>
+      </div>
+      <div class="text">
+        <h3>No Account yet? <a href="#">Register here</a></h3>
+      </div>
+      <div class="text-forgot">
+        <h3><a href="#">Forgot Password</a></h3>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Login">
+      </div>
+    </form>
+  </div>
+
 </body>
 </html>

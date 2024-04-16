@@ -21,6 +21,11 @@ body{
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
+.wrapper .logo-upper img{
+  height: auto;
+  width: 50%;
+  margin-left: 25%;
+}
 .wrapper h2{
   position: relative;
   font-size: 22px;
@@ -61,10 +66,6 @@ form .input-box input{
 .input-box input:valid{
   border-color: #4070f4;
 }
-form .policy{
-  display: flex;
-  align-items: center;
-}
 form h3{
   color: #707070;
   font-size: 14px;
@@ -84,7 +85,7 @@ form h3{
 form .text h3{
  color: #333;
  width: 100%;
- text-align: center;
+ text-align: left;
 }
 form .text h3 a{
   color: #4070f4;
@@ -93,3 +94,17 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+/* Login */
+form .text-forgot h3{
+  color: #333;
+  width: 100%;
+  text-align: left;
+  padding-bottom: 100px;
+ }
+ form .text-forgot h3 a{
+   color: #4070f4;
+   text-decoration: none;
+ }
+ form .text-forgot h3 a:hover{
+   text-decoration: underline;
+ }
