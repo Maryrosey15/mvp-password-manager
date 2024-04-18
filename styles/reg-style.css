@@ -1,3 +1,5 @@
+/* Style sheet for Registration, Login, Add */
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 *{
   margin: 0;
@@ -94,7 +96,7 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
-/* Login */
+/* Login forgot*/
 form .text-forgot h3{
   color: #333;
   width: 100%;
@@ -108,3 +110,20 @@ form .text-forgot h3{
  form .text-forgot h3 a:hover{
    text-decoration: underline;
  }
+
+ /* Generate Password Button */
+ .input-box.button-generate{
+  text-align: right;
+  margin-bottom: 20% !important;
+ }
+ .input-box.button-generate input{
+  color: #fff;
+  letter-spacing: 1px;
+  border: none;
+  background: #4070f4;
+  cursor: pointer;
+  width: 60%;
+}
+.input-box.button-generate input:hover{
+  background: #0e4bf1;
+}
