@@ -127,3 +127,14 @@ form .text-forgot h3{
 .input-box.button-generate input:hover{
   background: #0e4bf1;
 }
+.input-box-disregard{
+  text-align: center;
+  padding-top: 10px;
+}
+.text-disregard{
+  color: red;
+  text-decoration: none;
+}
+.input-box-disregard a:hover{
+  text-decoration: underline;
+}
