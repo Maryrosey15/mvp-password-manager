@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" dir="ltr">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Account Page</title>
-</head>
+    <title> Password Manager </title>
+    <link rel="stylesheet" href="/styles/reg-style.css">
+   </head>
 <body>
-    <h1>Edit Account Page</h1>
+  <div class="wrapper">
+    <div class="logo-upper">
+      <img src="../img/logo-square.png" alt="Password Manager Logo">
+      <select name="website-logo" id="img-holder">
+        <option value="1" selected>Picture 1</option>
+        <option value="2" selected>Picture 2</option>
+        <option value="3" selected>Picture 3</option>
+        <option value="4" selected>Picture 4</option>
+        <option value="5" selected>Picture 5</option>
+      </select>
+    </div>
+    <h2>Edit Account</h2>
+    <form action="#">
+      <div class="input-box">
+        <input type="text" placeholder="Name" required>
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Website/url" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Email" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Username" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" required>
+      </div>
+      <div class="input-box button-generate">
+        <input type="Submit" value="Generate Password">
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Save Changes">
+      </div>
+      <div class="input-box-disregard">
+        <a class="text-disregard" href="">Disregard Changes</a>
+      </div>
+    </form>
+  </div>
+
 </body>
 </html>
