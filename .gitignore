@@ -1,4 +1,10 @@
 database.db
 
+.env
+
+.DS_Store
+
 #Log files
 *.log
+
+__pycache__
