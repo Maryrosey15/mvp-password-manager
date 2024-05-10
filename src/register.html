@@ -5,22 +5,22 @@
     <div class="logo-upper">
       <img src="../static/image/logo.png" alt="Password Manager Logo">
     </div>
-    <h2>Login</h2>
-    <form action="#">
+    <h2>Registration</h2>
+    <form method="POST">
       <div class="input-box">
-        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="username" placeholder="Username" required>
       </div>
       <div class="input-box">
         <input type="password" name="master_password" placeholder="Password" required>
       </div>
-      <div class="text">
-        <h3>No Account yet? <a href="{{ url_for('register') }}">Register here</a></h3>
+      <div class="input-box">
+        <input type="password" name="re_master_password" placeholder="Re-Enter Password" required>
       </div>
-      <div class="text-forgot">
-        <h3><a href="{{ url_for('forgot') }}">Forgot Password</a></h3>
+      <div class="text">
+        <h3>Already have an account? <a href="{{ url_for('login') }}">Click here</a></h3>
       </div>
       <div class="input-box button">
-        <input type="Submit" value="Login">
+        <input type="Submit" value="Register Now">
       </div>
     </form>
     {% if error %}
