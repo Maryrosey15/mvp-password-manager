@@ -1,41 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Password Manager </title>
-    <link rel="stylesheet" href="/styles/reg-style.css">
-   </head>
-<body>
+{% extends 'layout.html' %}
+
+{% block content %}
   <div class="wrapper">
     <div class="logo-upper">
-      <img src="../img/logo-square.png" alt="Password Manager Logo">
+      <img src="../static/image/logo.png" alt="Password Manager Logo">
     </div>
     <h2>Add Account</h2>
     <form action="#">
       <div class="input-box">
-        <input type="text" placeholder="Name" required>
+        <input type="text" name="username" placeholder="Username" required>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Website/url" required>
+        <input type="password" name="password" placeholder="Password" required>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Email" required>
+        <input type="text" name="website" placeholder="Website/URL" required>
       </div>
-      <div class="input-box">
-        <input type="password" placeholder="Username" required>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-      </div>
-      <div class="input-box button-generate">
-        <input type="Submit" value="Generate Password">
-      </div>
+      
       <div class="input-box button">
         <input type="Submit" value="Add Account">
       </div>
     </form>
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
   </div>
-
-</body>
-</html>
+{% endblock %}

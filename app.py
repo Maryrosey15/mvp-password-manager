@@ -58,9 +58,9 @@ def login():
         master_password = request.form['master_password']
 
         user = get_user_by_username(username)
-        if user and user['password'] == master_password:
+        if user and user['master_password'] == master_password:
             session['user_id'] = user['id']
-            return redirect(url_for('list'))
+            return redirect(url_for('lists'))
         else:
             error = 'Invalid username or password'
             return render_template('login.html', error=error)
@@ -101,7 +101,7 @@ def forgot():
     return render_template("forgot.html")
 
 
-@app.route("/list")
+@app.route("/lists")
 def lists():
     # if 'user_id' in session:
     #     # code here to fetch account data from database
@@ -114,6 +114,20 @@ def lists():
 
 @app.route("/add")
 def add():
+    if request.method == 'POST':
+        username = request.form('username')
+        password = request.form('password')
+        website = request.form('website')
+        image = request.form('image')
+
+        db = get_db_connection()
+        cur = db.cursor()
+        cur.execute('INSERT INTO users (username, password, website, image) VALUES (?,?,?,?)', (username, password, website, image))
+        db.commit()
+        db.close()
+
+        return redirect(url_for('lists'))
+
     return render_template("add.html")
 
 
@@ -127,7 +141,14 @@ def account():
     return render_template("account.html")
 
 
+@app.route("/logout")
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('login'))
+
+
 init_db()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
