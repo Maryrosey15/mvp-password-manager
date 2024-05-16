@@ -3,13 +3,13 @@
 {% block content %}
   <div class="wrapper">
     <div class="logo-upper">
-      <img src="../static/image/logo.png" alt="Password Manager Logo">
+      <img src="../static/logo.png" alt="Password Manager Logo">
     </div>
     <h2>Login</h2>
     {% if error %}
       <p class="error-text">{{ error }}</p>
     {% endif %}
-    <form method="post">
+    <form method="POST">
       <div class="input-box">
         <input type="text" name="username" placeholder="Username" required>
       </div>

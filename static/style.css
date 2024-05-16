@@ -28,6 +28,13 @@ body{
   width: 50%;
   margin-left: 25%;
 }
+.wrapper .account-img img{
+  height: auto;
+  width: 20%;
+  margin-left: 40%;
+  padding-bottom: 20px;
+  
+}
 .wrapper h2{
   position: relative;
   font-size: 22px;
@@ -143,4 +150,44 @@ form .text-forgot h3{
 .error-text{
   color: red;
   padding-top: 10px;
+}
+
+/* Password List Page */
+.list-container{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-gap: 20px; 
+  width: 100%; 
+  padding-top: 20px;
+}
+.list-content-img{
+  margin: 5px; 
+}
+.list-content-website{
+  margin: 5px; 
+  padding-top: 10px;
+}
+.list-content-edit{
+  margin: 5px; 
+  text-align: end;
+  padding-top: 10px;
+  justify-content: end;
+}
+
+.add-account-button{
+  text-align: right;
+  padding-top: 30px;
+}
+.add-account-button a{
+  color: #fff;
+  letter-spacing: 1px;
+  border: none;
+  background: #4070f4;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+.add-account-button a:hover{
+  background: #0e4bf1;
 }
