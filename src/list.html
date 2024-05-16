@@ -1,10 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-  <div class="wrapper">
-    <div class="logo-upper">
-      <img src="../static/image/logo.png" alt="Password Manager Logo">
+<div class="wrapper">
+  <div class="logo-upper">
+    <img src="../static/logo.png" alt="Password Manager Logo">
+  </div>
+  <h2>Password List</h2>
+  <div class="list-container">
+      {% for account in accounts %}
+        <div class="list-content-img">
+          <img src="{{ url_for('static', filename=account['image']) }}" alt="Image" width="50">
+        </div>
+        <div class="list-content-website">
+          {{ account['website'] }}
+        </div>
+        <div class="list-content-edit">
+          <a href="{{ url_for('edit', account_id=account['id']) }}">></a>
+        </div>
+      {% endfor %}
     </div>
-    <h2>Password List</h2>
+    <div class="add-account-button">
+      <a href="{{ url_for('add') }}">Add Account</a>
+    </div>
   </div>
 {% endblock %}

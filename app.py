@@ -103,26 +103,23 @@ def forgot():
 
 @app.route("/lists")
 def lists():
-    # if 'user_id' in session:
-    #     # code here to fetch account data from database
-
-    #     return render_template('list.html')
-    # else:
-    #     return render_template("login.html")
-    return render_template('list.html')
+    db = get_db_connection()
+    accounts = db.execute('SELECT * FROM accounts').fetchall()
+    db.close()
+    return render_template('list.html', accounts=accounts)
 
 
-@app.route("/add")
+@app.route("/add", methods = ['GET', 'POST'])
 def add():
     if request.method == 'POST':
-        username = request.form('username')
-        password = request.form('password')
-        website = request.form('website')
-        image = request.form('image')
+        acc_username = request.form['acc_username']
+        password = request.form['password']
+        website = request.form['website']
+        image = request.form['image']
 
         db = get_db_connection()
         cur = db.cursor()
-        cur.execute('INSERT INTO users (username, password, website, image) VALUES (?,?,?,?)', (username, password, website, image))
+        cur.execute('INSERT INTO accounts (username, password, website, image) VALUES (?,?,?,?)', (acc_username, password, website, image))
         db.commit()
         db.close()
 
