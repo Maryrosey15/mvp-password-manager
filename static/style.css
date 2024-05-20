@@ -103,6 +103,38 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+/* Show password checkbox */
+.input-box-show.checkbox{
+  text-align: right;
+}
+/* Generate password button */
+.input-box-generate.button{
+  text-align: right;
+  padding-top: 10px;
+}
+.input-box-generate.button button{
+  color: #fff;
+  background-color: #4070f4;
+  letter-spacing: 1px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+/* Delete button */
+.input-box-delete.button input{
+  color: red;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  margin-left: 42%;
+}
+.input-box-delete.button input:hover{
+  text-decoration: underline;
+}
 /* Login forgot*/
 form .text-forgot h3{
   color: #333;
@@ -176,7 +208,7 @@ form .text-forgot h3{
 
 .add-account-button{
   text-align: right;
-  padding-top: 30px;
+  padding-top: 50px;
 }
 .add-account-button a{
   color: #fff;
@@ -190,4 +222,12 @@ form .text-forgot h3{
 }
 .add-account-button a:hover{
   background: #0e4bf1;
+}
+
+/* Edit Page */
+.wrapper .edit-img img{
+  height: auto;
+  width: 20%;
+  margin-left: 40%;
+  padding-bottom: 20px;
 }

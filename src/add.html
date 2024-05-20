@@ -14,17 +14,41 @@
         </select>
       </div>
       <div class="input-box">
+        <input type="text" name="website" placeholder="Website/URL" required>
+      </div>
+      <div class="input-box">
         <input type="text" name="acc_username" placeholder="Username" required>
       </div>
       <div class="input-box">
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password" id="password" placeholder="Password">
       </div>
-      <div class="input-box">
-        <input type="text" name="website" placeholder="Website/URL" required>
+      <div class="input-box-show checkbox">
+        <input type="checkbox" id="show_password" onclick="togglePassword()"> Show Password
+      </div>
+      <div class="input-box-generate button">
+        <button type="button" onclick="generatePassword()">Generate Password</button>
       </div>
       <div class="input-box button">
         <input type="Submit" value="Add Account">
       </div>
     </form>
   </div>
+  <script>
+    function generatePassword() {
+      fetch('{{ url_for("generate_password_route") }}')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('password').value = data.password;
+        });
+    }
+
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
 {% endblock %}

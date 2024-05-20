@@ -1,7 +1,9 @@
 from flask import Flask
-from flask import render_template, request, url_for, session, redirect, flash, g
+from flask import render_template, request, url_for, session, redirect, flash, g, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
+import string
+import secrets
 
 from flask_login import LoginManager
 
@@ -49,6 +51,15 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+def generate_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(secrets.choice(characters) for _ in range(length))
+
+
+@app.route("/generate_password")
+def generate_password_route():
+    password = generate_password()
+    return jsonify(password=password)
 
 # Login Page
 @app.route("/", methods=['GET', 'POST'])
@@ -113,7 +124,7 @@ def lists():
 def add():
     if request.method == 'POST':
         acc_username = request.form['acc_username']
-        password = request.form['password']
+        password = request.form['password'] or generate_password()
         website = request.form['website']
         image = request.form['image']
 
@@ -128,14 +139,43 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/edit")
-def edit():
-    return render_template("edit.html")
+@app.route("/account/<int:account_id>")
+def account(account_id):
+    db = get_db_connection()
+    account = db.execute('SELECT * FROM accounts WHERE id = ?', (account_id)).fetchone()
+    db.close()
+    return render_template("account.html", account=account)
 
 
-@app.route("/account")
-def account():
-    return render_template("account.html")
+@app.route("/edit<int:account_id>", methods=['GET', 'POST'])
+def edit(account_id):
+    db = get_db_connection()
+    account = db.execute('SELECT * FROM accounts WHERE id = ?', (account_id,)).fetchone()
+
+    if request.method == 'POST':
+        acc_username = request.form['acc_username']
+        password = request.form['password'] or generate_password()
+        website = request.form['website']
+        image = request.form['image']
+
+        db.execute('UPDATE accounts SET username = ?, password = ?, website = ?, image = ? WHERE id = ?', (acc_username, password, website, image, account_id))
+
+        db.commit()
+        db.close()
+
+        return redirect(url_for('lists'))
+    
+    db.close()
+    return render_template('edit.html', account=account)
+
+
+@app.route("/delete/<int:account_id>", methods=['POST'])
+def delete(account_id):
+    db = get_db_connection()
+    db.execute('DELETE FROM accounts WHERE id = ?', (account_id,))
+    db.commit()
+    db.close()
+    return redirect(url_for('lists'))
 
 
 @app.route("/logout")

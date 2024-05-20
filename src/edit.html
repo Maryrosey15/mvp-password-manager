@@ -1,51 +1,64 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Password Manager </title>
-    <link rel="stylesheet" href="/styles/reg-style.css">
-   </head>
-<body>
+{% extends 'layout.html' %}
+
+{% block content %}
   <div class="wrapper">
-    <div class="logo-upper">
-      <img src="../img/logo-square.png" alt="Password Manager Logo">
-      <select name="website-logo" id="img-holder">
-        <option value="1" selected>Picture 1</option>
-        <option value="2" selected>Picture 2</option>
-        <option value="3" selected>Picture 3</option>
-        <option value="4" selected>Picture 4</option>
-        <option value="5" selected>Picture 5</option>
-      </select>
-    </div>
-    <h2>Edit Account</h2>
-    <form action="#">
+    <form method="POST", action="{{ url_for('edit', account_id=account['id']) }}">
+      <div class="edit-img">
+        <img src="{{ url_for('static', filename=account['image']) }}" alt="Image" width="100">
+      </div>
+      <div>
+        <div>
+          <label for="image">Choose an image</label>
+          <select name="image" id="image">
+            <option value="facebook.png">Facebook</option>
+            <option value="instagram.svg">Instagram</option>
+            <option value="linkedin.webp">Linkedin</option>
+            <option value="tiktok.webp">Tiktok</option>
+          </select>
+        </div>
+      </div>
+      <h2>Edit Account</h2>
       <div class="input-box">
-        <input type="text" placeholder="Name" required>
+        <input type="text" name="website" placeholder="Website/URL" value="{{ account['website'] }}">
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Website/url" required>
+        <input type="text" name="acc_username" placeholder="Username" value="{{ account['username'] }}">
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Email" required>
+        <input type="password" name="password" id="password" placeholder="Password" value="{{ account['password'] }}">
       </div>
-      <div class="input-box">
-        <input type="password" placeholder="Username" required>
+      <div class="input-box-show checkbox">
+        <input type="checkbox" id="show_password" onclick="togglePassword()"> Show Password
       </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-      </div>
-      <div class="input-box button-generate">
-        <input type="Submit" value="Generate Password">
+      <div class="input-box-generate button">
+        <button type="button" onclick="generatePassword()">Generate Password</button>
       </div>
       <div class="input-box button">
-        <input type="Submit" value="Save Changes">
+        <input type="Submit" value="Update">
       </div>
-      <div class="input-box-disregard">
-        <a class="text-disregard" href="">Disregard Changes</a>
+    </form>
+    <form method="POST" action="{{ url_for('delete', account_id=account['id']) }}">
+      <div class="input-box-delete button">
+        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this account?');">
       </div>
     </form>
   </div>
+  <script>
+    function generatePassword() {
+      fetch('{{ url_for("generate_password_route") }}')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('password').value = data.password;
+        });
+    }
 
-</body>
-</html>
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
+{% endblock %}

@@ -1,11 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
-</head>
-<body>
-    <h1>Account Page</h1>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="wrapper">
+  <form method="POST", action="{{ url_for('edit', account_id=account['id']) }}">
+    <div class="edit-img">
+      <img src="{{ url_for('static', filename=account['image']) }}" alt="Image" width="100">
+    </div>
+    <div>
+      <div>
+        <label for="image">Choose an image</label>
+        <select name="image" id="image">
+          <option value="facebook.png">Facebook</option>
+          <option value="instagram.svg">Instagram</option>
+          <option value="linkedin.webp">Linkedin</option>
+          <option value="tiktok.webp">Tiktok</option>
+        </select>
+      </div>
+    </div>
+    <h2>Edit Account</h2>
+    <div class="input-box">
+      <input type="text" name="acc_username" placeholder="Username" value="{{ account['username'] }}">
+    </div>
+    <div class="input-box">
+      <input type="password" name="password" placeholder="Password" value="{{ account['password'] }}">
+    </div>
+    <div class="input-box">
+      <input type="text" name="website" placeholder="Website/URL" value="{{ account['website'] }}">
+    </div>
+    <div class="input-box button">
+      <input type="Submit" value="Update">
+    </div>
+  </form>
+</div>
+{% endblock %}
