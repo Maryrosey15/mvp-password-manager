@@ -103,6 +103,17 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+/* Logout Button */
+.logout-button{
+  text-align: right;
+}
+.logout-button a{
+  color: #0e4bf1;
+  text-decoration: none;
+}
+.logout-button a:hover{
+  color:#4070f4
+}
 /* Show password checkbox */
 .input-box-show.checkbox{
   text-align: right;
@@ -135,7 +146,7 @@ form .text h3 a:hover{
 .input-box-delete.button input:hover{
   text-decoration: underline;
 }
-/* Login forgot*/
+/* Login forgot Button */
 form .text-forgot h3{
   color: #333;
   width: 100%;

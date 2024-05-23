@@ -2,6 +2,9 @@
 
 {% block content %}
 <div class="wrapper">
+  <div class="logout-button">
+    <a href="{{ url_for('main.logout') }}">Logout</a>
+  </div>
   <div class="logo-upper">
     <img src="../static/logo.png" alt="Password Manager Logo">
   </div>
@@ -15,12 +18,12 @@
           {{ account['website'] }}
         </div>
         <div class="list-content-edit">
-          <a href="{{ url_for('edit', account_id=account['id']) }}">></a>
+          <a href="{{ url_for('main.edit', account_id=account['id']) }}">></a>
         </div>
       {% endfor %}
     </div>
     <div class="add-account-button">
-      <a href="{{ url_for('add') }}">Add Account</a>
+      <a href="{{ url_for('main.add') }}">Add Account</a>
     </div>
   </div>
 {% endblock %}

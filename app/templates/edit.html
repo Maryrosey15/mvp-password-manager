@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="wrapper">
-    <form method="POST", action="{{ url_for('edit', account_id=account['id']) }}">
+    <form method="POST", action="{{ url_for('main.edit', account_id=account['id']) }}">
       <div class="edit-img">
         <img src="{{ url_for('static', filename=account['image']) }}" alt="Image" width="100">
       </div>
@@ -37,7 +37,7 @@
         <input type="Submit" value="Update">
       </div>
     </form>
-    <form method="POST" action="{{ url_for('delete', account_id=account['id']) }}">
+    <form method="POST" action="{{ url_for('main.delete', account_id=account['id']) }}">
       <div class="input-box-delete button">
         <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this account?');">
       </div>
@@ -45,7 +45,7 @@
   </div>
   <script>
     function generatePassword() {
-      fetch('{{ url_for("generate_password_route") }}')
+      fetch('{{ url_for("main.generate_password_route") }}')
         .then(response => response.json())
         .then(data => {
           document.getElementById('password').value = data.password;
