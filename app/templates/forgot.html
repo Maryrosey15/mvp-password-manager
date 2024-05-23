@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="wrapper">
+    <h2>Forgot Password</h2>
+    <form method="POST">
+        <div class="input-box">
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="input-box button">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

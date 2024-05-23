@@ -35,7 +35,7 @@
   </div>
   <script>
     function generatePassword() {
-      fetch('{{ url_for("generate_password_route") }}')
+      fetch('{{ url_for("main.generate_password_route") }}')
         .then(response => response.json())
         .then(data => {
           document.getElementById('password').value = data.password;
