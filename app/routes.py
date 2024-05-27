@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_login import login_user, logout_user, login_required
-from app.models import get_user_by_username, User, get_db_connection, generate_password
-
+from .models import get_user_by_username, User, get_db_connection, generate_password
+from flask_mail import Mail
 
 main = Blueprint('main', __name__)
 
@@ -79,13 +79,13 @@ def add():
     return render_template("add.html")
 
 
-@main.route("/account/<int:account_id>")
-@login_required
-def account(account_id):
-    db = get_db_connection()
-    account = db.execute('SELECT * FROM accounts WHERE id = ?', (account_id,)).fetchone()
-    db.close()
-    return render_template("account.html", account=account)
+# @main.route("/account/<int:account_id>")
+# @login_required
+# def account(account_id):
+#     db = get_db_connection()
+#     account = db.execute('SELECT * FROM accounts WHERE id = ?', (account_id,)).fetchone()
+#     db.close()
+#     return render_template("account.html", account=account)
 
 
 @main.route("/edit<int:account_id>", methods=['GET', 'POST'])
@@ -126,6 +126,7 @@ def logout():
 
 
 @main.route("/generate_password")
+@login_required
 def generate_password_route():
     password = generate_password()
     return jsonify(password=password)
