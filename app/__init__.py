@@ -2,6 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from app.models import init_db, User
 
+
 app = Flask(__name__, template_folder='templates')
 app.config.from_object('config.Config')
 
@@ -18,3 +19,4 @@ with app.app_context():
 @login_manager.user_loader
 def load_user(user_id):
     return User.get_by_id(user_id)
+

@@ -10,5 +10,9 @@ CREATE TABLE IF NOT EXISTS accounts (
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     website TEXT NOT NULL,
-    image BLOB NOT NULL
+    image BLOB NOT NULL,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+

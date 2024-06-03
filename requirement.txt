@@ -1,3 +1,4 @@
-sendgrid
+Flask
 Flask-Mail
 Flask-Login
+Flask-Security-Too
