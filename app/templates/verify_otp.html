@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div class="wrapper">
+    <h2>Enter OTP</h2>
+    {% if error %}
+      <p class="error-text">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+      <div class="input-box">
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Verify OTP">
+      </div>
+    </form>
+  </div>
+{% endblock %}

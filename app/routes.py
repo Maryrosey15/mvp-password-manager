@@ -5,20 +5,21 @@ from .models import update_user_password, get_user_by_email
 from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 import itsdangerous
+import pyotp
 
 main = Blueprint('main', __name__)
 
 
-# Configure Flask-Mail
+# Flask-Mail Configuration
 def create_app():
     app = Flask(__name__)
 
     app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USERNAME'] = 'xxxxxmail'
-    app.config['MAIL_PASSWORD'] = 'xxxxxkey'
-    app.config['MAIL_DEFAULT_SENDER'] = 'xxxxmail'
+    app.config['MAIL_USERNAME'] = 'xxxxx'
+    app.config['MAIL_PASSWORD'] = 'xxxxx'
+    app.config['MAIL_DEFAULT_SENDER'] = 'rose.pajanel@gmail.com'
     mail = Mail(app)
     mail.init_app(app)
     return app
@@ -40,13 +41,59 @@ def login():
         master_password = request.form['master_password']
         user_data = get_user_by_username(username)
         if user_data and check_password_hash(user_data['master_password'], master_password):
-            user = User(user_data['id'], user_data['username'], user_data['master_password'])
-            login_user(user)
-            return redirect(url_for('main.lists'))
+            # OTP Generation
+            otp_secret = pyotp.random_base32()
+            totp = pyotp.TOTP(otp_secret)
+            otp = totp.now()
+
+            # OTP secert store in session
+            session['otp_secret'] = otp_secret
+            session['username'] = username
+
+            # Send OTP to users email
+            email = user_data['email']
+            msg = Message('Your OTP Code for ABC Password Manager', sender=app.config['MAIL_USERNAME'], recipients=[email])
+            msg.body = f'Your ABC Password Manager OTP code is {otp}'
+            mail.send(msg)
+
+            return redirect(url_for('main.verify_otp'))
         else:
             error = 'Invalid username or password'
             return render_template('login.html', error=error)
+
+        #     user = User(user_data['id'], user_data['username'], user_data['master_password'])
+        #     login_user(user)
+        #     return redirect(url_for('main.lists'))
+        # else:
+        #     error = 'Invalid username or password'
+        #     return render_template('login.html', error=error)
+
     return render_template("login.html")
+
+# OTP verification route
+@main.route("/verify_otp", methods=['GET', 'POST'])
+def verify_otp():
+    if request.method == 'POST':
+        otp = request.form['otp']
+        otp_secret = session.get('otp_secret')
+        username = session.get('username')
+
+        if not otp_secret or not username:
+            flash('Session expired. Please login again.', 'danger')
+            return redirect(url_for('main.login'))
+        
+        totp = pyotp.TOTP(otp_secret)
+        if totp.verify(otp):
+            user_data = get_user_by_username(username)
+            user = User(user_data['id'], user_data['username'], user_data['master_password'])
+            login_user(user)
+            session.pop('otp_secret', None)
+            session.pop('username', None)
+            return redirect(url_for('main.lists'))
+        else:
+            error = 'Invalid OTP'
+            return render_template('verify_otp.html', error=error)
+    return render_template("verify_otp.html")
 
 
 @main.route("/register", methods=['GET', 'POST'])
