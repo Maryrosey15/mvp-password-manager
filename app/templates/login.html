@@ -1,3 +1,4 @@
+<!-- User login template -->
 {% extends 'layout.html' %}
 
 {% block content %}
@@ -9,6 +10,16 @@
     {% if error %}
       <p class="error-text">{{ error }}</p>
     {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" style="color: red; padding-top: 10px;">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+  
     <form method="POST">
       <div class="input-box">
         <input type="text" name="username" placeholder="Username" required>
