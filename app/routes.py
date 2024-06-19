@@ -20,9 +20,9 @@ def create_app():
     app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USERNAME'] = 'rose.pajanel@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'grtfgjmypvlxprxx'
-    app.config['MAIL_DEFAULT_SENDER'] = 'rose.pajanel@gmail.com'
+    app.config['MAIL_USERNAME'] = 'xxxxx'
+    app.config['MAIL_PASSWORD'] = 'xxxxx'
+    app.config['MAIL_DEFAULT_SENDER'] = 'xxxxx'
 
     # Initialise Flask-Mail
     mail = Mail(app)
