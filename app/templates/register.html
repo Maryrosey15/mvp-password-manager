@@ -1,3 +1,4 @@
+<!-- User registration template -->
 {% extends 'layout.html' %}
 
 {% block content %}
@@ -6,6 +7,9 @@
       <img src="../static/logo.png" alt="Password Manager Logo">
     </div>
     <h2>Registration</h2>
+    {% if error %}
+      <p class="error-text">{{ error }}</p>
+    {% endif %}
     <form method="POST">
       <div class="input-box">
         <input type="text" name="username" placeholder="Username" required>
@@ -26,8 +30,5 @@
         <input type="Submit" value="Register Now">
       </div>
     </form>
-    {% if error %}
-      <p>{{ error }}</p>
-    {% endif %}
   </div>
 {% endblock %}
